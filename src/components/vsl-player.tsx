@@ -46,6 +46,26 @@ export default function VslPlayer({ onVideoEnd }: { onVideoEnd: () => void }) {
   const [hasInteracted, setHasInteracted] = useState(false);
 
   useEffect(() => {
+    // Weekly reset logic
+    const today = new Date();
+    const lastResetStr = localStorage.getItem('vsl_lastReset');
+    if (lastResetStr) {
+      const lastResetDate = new Date(lastResetStr);
+      const diffTime = Math.abs(today.getTime() - lastResetDate.getTime());
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      
+      if (today.getDay() === 0 && diffDays >= 1) { // It's Sunday and at least a day has passed since last reset
+        localStorage.removeItem('vsl_videoEnded');
+        localStorage.removeItem('vsl_hasInteracted');
+        localStorage.removeItem('vsl_currentTime');
+        localStorage.removeItem('vsl_videoEndTime');
+        localStorage.setItem('vsl_lastReset', today.toISOString());
+      }
+    } else {
+      localStorage.setItem('vsl_lastReset', today.toISOString());
+    }
+
+
     const videoEndedStored = localStorage.getItem('vsl_videoEnded') === 'true';
     const userHasInteracted = localStorage.getItem('vsl_hasInteracted') === 'true';
     setHasInteracted(userHasInteracted);
@@ -222,7 +242,7 @@ export default function VslPlayer({ onVideoEnd }: { onVideoEnd: () => void }) {
     <div className="w-full">
       <div className="relative aspect-video w-full max-w-4xl mx-auto overflow-hidden rounded-lg shadow-2xl bg-black">
         <div id="youtube-player" className="w-full h-full" />
-        {isMuted && (
+        {isMuted && !hasInteracted && (
           <div
             className="absolute inset-0 z-10 cursor-pointer"
             onClick={handleInitialPlay}
@@ -256,3 +276,5 @@ export default function VslPlayer({ onVideoEnd }: { onVideoEnd: () => void }) {
     </div>
   );
 }
+
+    
