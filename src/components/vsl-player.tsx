@@ -4,6 +4,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Play, Volume2, VolumeX } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 // Declare YT for TypeScript
 declare global {
@@ -31,6 +32,22 @@ const calculateNonLinearProgress = (currentTime: number, duration: number): numb
     }
     return Math.min(100, 90 + ((videoPercentage - 80) / 20) * 10);
 };
+
+const HotmartButton = () => (
+  <a 
+    href="https://pay.hotmart.com/E101943327K?checkoutMode=2" 
+    className="hotmart-fb hotmart__button-checkout"
+  >
+    <Image 
+      src='https://static.hotmart.com/img/btn-buy-green.png' 
+      alt="Comprar agora"
+      width={300}
+      height={58}
+      className="mx-auto"
+    />
+  </a>
+);
+
 
 export default function VslPlayer({ onVideoEnd }: { onVideoEnd: () => void }) {
   const playerRef = useRef<any>(null);
@@ -205,13 +222,7 @@ export default function VslPlayer({ onVideoEnd }: { onVideoEnd: () => void }) {
             </div>
             {showCta && (
               <div className="mt-8">
-                  <a href="https://pay.hotmart.com/D76247330M" target="_blank" rel="noopener noreferrer" className="block">
-                    <button 
-                      className="w-full max-w-md mx-auto animate-pulse rounded-lg bg-yellow-400 px-6 py-4 text-lg font-bold text-black shadow-lg transition hover:scale-105 sm:px-8 sm:text-xl md:text-2xl"
-                    >
-                        QUERO ACESSAR AGORA
-                    </button>
-                  </a>
+                  <HotmartButton />
               </div>
             )}
         </div>
@@ -244,13 +255,7 @@ export default function VslPlayer({ onVideoEnd }: { onVideoEnd: () => void }) {
 
       {showCta && (
         <div className="mt-8">
-            <a href="https://pay.hotmart.com/D76247330M" target="_blank" rel="noopener noreferrer" className="block">
-              <button 
-                className="w-full max-w-md mx-auto animate-pulse rounded-lg bg-yellow-400 px-6 py-4 text-lg font-bold text-black shadow-lg transition hover:scale-105 sm:px-8 sm:text-xl md:text-2xl"
-              >
-                  QUERO ACESSAR AGORA
-              </button>
-            </a>
+            <HotmartButton />
         </div>
       )}
     </div>
