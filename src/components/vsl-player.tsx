@@ -205,7 +205,7 @@ export default function VslPlayer({ onVideoEnd }: { onVideoEnd: () => void }) {
             </div>
             {showCta && (
               <div className="mt-8">
-                  <a href="https://pay.kiwify.com.br/N2HRXHr" target="_blank" rel="noopener noreferrer" className="block">
+                  <a href="https://pay.hotmart.com/D76247330M" target="_blank" rel="noopener noreferrer" className="block">
                     <button 
                       className="w-full max-w-md mx-auto animate-pulse rounded-lg bg-yellow-400 px-6 py-4 text-lg font-bold text-black shadow-lg transition hover:scale-105 sm:px-8 sm:text-xl md:text-2xl"
                     >
@@ -244,7 +244,7 @@ export default function VslPlayer({ onVideoEnd }: { onVideoEnd: () => void }) {
 
       {showCta && (
         <div className="mt-8">
-            <a href="https://pay.kiwify.com.br/N2HRXHr" target="_blank" rel="noopener noreferrer" className="block">
+            <a href="https://pay.hotmart.com/D76247330M" target="_blank" rel="noopener noreferrer" className="block">
               <button 
                 className="w-full max-w-md mx-auto animate-pulse rounded-lg bg-yellow-400 px-6 py-4 text-lg font-bold text-black shadow-lg transition hover:scale-105 sm:px-8 sm:text-xl md:text-2xl"
               >
