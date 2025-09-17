@@ -4,7 +4,7 @@ name: chinesa
 on:
   push:
     branches:
-      - hotmart
+      - main
   workflow_dispatch:
 
 permissions:
