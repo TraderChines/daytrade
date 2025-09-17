@@ -2,7 +2,13 @@
 'use client';
 
 import { useState } from 'react';
-import VslPlayer from '@/components/vsl-player';
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/skeleton';
+
+const VslPlayer = dynamic(() => import('@/components/vsl-player'), {
+  ssr: false,
+  loading: () => <Skeleton className="w-full aspect-video" />,
+});
 
 export default function Home() {
   const [videoEnded, setVideoEnded] = useState(false);

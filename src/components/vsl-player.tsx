@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import { Play, Volume2, VolumeX } from 'lucide-react';
+import { VolumeX } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 
@@ -59,7 +59,6 @@ export default function VslPlayer({ onVideoEnd }: { onVideoEnd: () => void }) {
   const [videoEnded, setVideoEnded] = useState(false);
   const [counter, setCounter] = useState<{ value: string; color: string } | null>(null);
   const [isMuted, setIsMuted] = useState(true);
-  const [showUnmuteButton, setShowUnmuteButton] = useState(true);
   const [hasInteracted, setHasInteracted] = useState(false);
 
   useEffect(() => {
@@ -156,13 +155,13 @@ export default function VslPlayer({ onVideoEnd }: { onVideoEnd: () => void }) {
     }
 
     const onPlayerStateChange = (event: any) => {
-      if (event.data === window.YT.PlayerState.PLAYING) {
+      if (window.YT && event.data === window.YT.PlayerState.PLAYING) {
         setIsPlaying(true);
         startProgressInterval();
-      } else if (event.data === window.YT.PlayerState.PAUSED) {
+      } else if (window.YT && event.data === window.YT.PlayerState.PAUSED) {
         setIsPlaying(false);
         stopProgressInterval();
-      } else if (event.data === window.YT.PlayerState.ENDED) {
+      } else if (window.YT && event.data === window.YT.PlayerState.ENDED) {
         handleVideoEnd();
       }
     };
@@ -184,7 +183,12 @@ export default function VslPlayer({ onVideoEnd }: { onVideoEnd: () => void }) {
     if (!window.YT) {
         const tag = document.createElement('script');
         tag.src = 'https://www.youtube.com/iframe_api';
-        document.body.appendChild(tag);
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        if (firstScriptTag && firstScriptTag.parentNode) {
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        } else {
+            document.head.appendChild(tag);
+        }
         window.onYouTubeIframeAPIReady = createPlayer;
     } else {
         createPlayer();
@@ -193,7 +197,7 @@ export default function VslPlayer({ onVideoEnd }: { onVideoEnd: () => void }) {
     return () => {
         stopProgressInterval();
     };
-  }, [onVideoEnd]);
+  }, [onVideoEnd, hasInteracted]);
 
   const handleInitialPlay = () => {
     if (!playerRef.current || !playerReady || videoEnded) return;
@@ -235,15 +239,13 @@ export default function VslPlayer({ onVideoEnd }: { onVideoEnd: () => void }) {
         <div id="youtube-player" className="w-full h-full" />
         {isMuted && (
           <div
-            className="absolute inset-0 z-10 cursor-pointer"
+            className="absolute inset-0 z-10 flex cursor-pointer flex-col items-center justify-center bg-black bg-opacity-40 transition-opacity duration-300"
             onClick={handleInitialPlay}
           >
             {playerReady && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-40 transition-opacity duration-300">
-                <div className="text-white text-center p-4 rounded-lg">
-                  <p className="text-2xl font-bold mb-4">CLIQUE PARA ATIVAR O SOM</p>
-                  <VolumeX className="h-16 w-16 text-white drop-shadow-lg md:h-20 md:w-20 mx-auto" fill="white" />
-                </div>
+              <div className="text-center text-white p-4 rounded-lg">
+                <p className="mb-4 text-2xl font-bold">CLIQUE PARA ATIVAR O SOM</p>
+                <VolumeX className="mx-auto h-16 w-16 drop-shadow-lg md:h-20 md:w-20 text-white" fill="white" />
               </div>
             )}
           </div>
