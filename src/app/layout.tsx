@@ -3,7 +3,7 @@ import './globals.css';
 import Script from 'next/script';
 
 export const metadata: Metadata = {
-  title: 'Video Sales Pro',
+  title: 'Estratégia Chinesa',
   description: 'Descubra o gatilho mais certeiro do mercado',
 };
 

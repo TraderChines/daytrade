@@ -1,4 +1,4 @@
-# Video Sales Pro
+# Estratégia Chinesa
 
 Este é um iniciador do NextJS no Firebase Studio.
 
