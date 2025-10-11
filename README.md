@@ -1,6 +1,5 @@
-# Firebase Studio
+# Video Sales Pro
 
-This is a NextJS starter in Firebase Studio.
+Este é um iniciador do NextJS no Firebase Studio.
 
-To get started, take a look at src/app/page.tsx.
-lear
+Para começar, dê uma olhada em `src/app/page.tsx`.
