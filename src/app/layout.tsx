@@ -1,6 +1,7 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import Script from 'next/script';
+import { FirebaseProvider } from '@/firebase/provider';
 
 export const metadata: Metadata = {
   title: 'Estratégia Chinesa',
@@ -21,7 +22,9 @@ export default function RootLayout({
         <link rel="stylesheet" type="text/css" href="https://static.hotmart.com/css/hotmart-fb.min.css" />
       </head>
       <body className="font-body antialiased">
-        {children}
+        <FirebaseProvider>
+          {children}
+        </FirebaseProvider>
         <Script src="https://static.hotmart.com/checkout/widget.min.js" strategy="lazyOnload" />
       </body>
     </html>
