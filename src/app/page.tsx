@@ -28,7 +28,7 @@ export default function Home() {
           <span className="text-primary"> assertivo no daytrade</span>
         </h1>
         
-        <div className="mt-8 w-full max-w-4xl">
+        <div className="relative z-50 mt-8 w-full max-w-4xl">
           <VslPlayer onVideoEnd={() => setVideoEnded(true)} />
         </div>
       </main>
