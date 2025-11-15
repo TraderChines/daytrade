@@ -224,11 +224,9 @@ export default function VslPlayer({ onVideoEnd }: { onVideoEnd: () => void }) {
                 <div className={cn("text-7xl md:text-8xl font-bold my-2", counter.color)}>{counter.value}</div>
                 <p className="text-xl md:text-2xl font-bold uppercase text-white">Licenças</p>
             </div>
-            {showCta && (
-              <div className="mt-8 relative z-20">
-                  <HotmartButton />
-              </div>
-            )}
+            <div className="mt-8 relative z-20">
+                <HotmartButton />
+            </div>
         </div>
     );
   }
