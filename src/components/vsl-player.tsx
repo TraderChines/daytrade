@@ -225,7 +225,7 @@ export default function VslPlayer({ onVideoEnd }: { onVideoEnd: () => void }) {
                 <p className="text-xl md:text-2xl font-bold uppercase text-white">Licenças</p>
             </div>
             {showCta && (
-              <div className="mt-8">
+              <div className="mt-8 relative z-20">
                   <HotmartButton />
               </div>
             )}
